@@ -2,22 +2,25 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>صباح الخير</title>
-
-  <!-- Open Graph (معاينة روابط) -->
-  <meta property="og:title" content="صباح الخير">
-  <meta property="og:description" content="أتمنى لك صباحًا مشرقًا ومليئًا بالخير">
-  <meta property="og:image" content="{{ url_for('static', filename='sabah.jpg') }}">
-  <meta property="og:type" content="website">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="صباح الخير">
-  <meta name="twitter:description" content="أتمنى لك صباحًا مشرقًا ومليئًا بالخير">
-  <meta name="twitter:image" content="{{ url_for('static', filename='sabah.jpg') }}">
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f5f5f5;
+    }
+    img {
+      max-width: 90%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+  </style>
 </head>
-<body style="text-align: center; background:#f5f5f5;">
-  <img src="{{ url_for('static', filename='sabah.jpg') }}" alt="صباح الخير" style="max-width:90%; border-radius:12px; margin-top:20px;">
+<body>
+  <img src="{{ url_for('static', filename='sabah.jpg') }}" alt="صباح الخير">
 </body>
 </html>
