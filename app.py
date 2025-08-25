@@ -10,7 +10,7 @@ def home():
 @app.route("/log", methods=["POST"])
 def log():
     data = request.get_json()
-    # Append log as JSON line
+    # سجل البيانات في ملف JSON (سطر لكل زيارة)
     with open("visitors_log.json", "a") as f:
         f.write(json.dumps(data) + "\n")
     return "", 204
